@@ -70,7 +70,9 @@ export class HLSPonyfill {
      * For manual handling of the live/event "seekable" range
      */
     private seekableTimeRanges?: SeekableTimeRanges;
-
+    public getSeekableRanges(): SeekableTimeRanges | undefined {
+        return this.seekableTimeRanges;
+    }
     /**
      * References to video and audio track lists
      * If the video element does not have them, we create them
@@ -340,7 +342,6 @@ export class HLSPonyfill {
             // Optionally store it on the video so the outside world can see:
             (this.video as any).videoTracks = this.videoTrackList;
         } else {
-            
             // Reuse an existing list (e.g. from Dash)
             this.videoTrackList = possibleList;
         }
