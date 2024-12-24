@@ -70,8 +70,14 @@ export class HLSPonyfill {
      * For manual handling of the live/event "seekable" range
      */
     private seekableTimeRanges?: SeekableTimeRanges;
-    public getSeekableRanges(): SeekableTimeRanges | undefined {
+    public get getSeekableRanges(): SeekableTimeRanges | undefined {
         return this.seekableTimeRanges;
+    }
+    public get seekable(): HTMLVideoElement['seekable'] {
+        const { seekableTimeRanges } = this;
+        return seekableTimeRanges === undefined
+            ? this.video.seekable
+            : seekableTimeRanges;
     }
     /**
      * References to video and audio track lists
